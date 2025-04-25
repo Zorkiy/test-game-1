@@ -1,0 +1,29 @@
+{
+  // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+  // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+  // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+        "type": "php",
+        "request": "launch",
+        "name": "Listen for Xdebug",
+        "port": 9003,
+        "pathMappings": {
+            "/var/www/html/petamicr.loc": "${workspaceFolder}"
+        },
+        "xdebugSettings": {
+            "max_children": 512,
+            "max_data": 1024,
+            "max_depth": 5
+        },
+        "log": true
+    },
+    {
+        "type": "chrome",
+        "request": "attach",
+        "name": "Attach to Chrome",
+        "port": 9222
+    }
+  ]
+}

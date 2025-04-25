@@ -1,0 +1,84 @@
+.
+├── app
+│   ├── Controllers
+│   │   ├── DefaultController.php
+│   │   ├── MainController.php
+│   │   └── ProfileController.php
+│   └── Models
+│       ├── MainModel.php
+│       └── UserModel.php
+├── core
+│   ├── Db.php
+│   └── Router.php
+├── functions
+│   └── main.php
+├── game.loc.code-workspace
+├── public
+│   └── index.php
+├── service
+│   ├── access.log
+│   ├── apache2
+│   │   ├── document-flow.loc.conf
+│   │   ├── petamicr.loc.conf
+│   │   └── php.ini
+│   ├── back_info.txt
+│   ├── change_access
+│   ├── db_loc_backup
+│   │   ├── 2024-05-06.sql
+│   │   ├── 2024-05-11.sql
+│   │   ├── 2024_05_23.sql.zip
+│   │   ├── 2024-05-25.sql
+│   │   └── 2024_05_27.sql.zip
+│   ├── db_prod_backup
+│   │   └── 2024_08_31.sql
+│   ├── error.log
+│   ├── get_files_statistic.sh
+│   ├── load_sql_files.sh
+│   ├── php
+│   │   └── mods-available
+│   │       ├── calendar.ini
+│   │       ├── ctype.ini
+│   │       ├── curl.ini
+│   │       ├── dom.ini
+│   │       ├── exif.ini
+│   │       ├── ffi.ini
+│   │       ├── fileinfo.ini
+│   │       ├── ftp.ini
+│   │       ├── gd.ini
+│   │       ├── gettext.ini
+│   │       ├── iconv.ini
+│   │       ├── intl.ini
+│   │       ├── mbstring.ini
+│   │       ├── mysqli.ini
+│   │       ├── mysqlnd.ini
+│   │       ├── opcache.ini
+│   │       ├── pdo.ini
+│   │       ├── pdo_mysql.ini
+│   │       ├── pdo_sqlite.ini
+│   │       ├── phar.ini
+│   │       ├── posix.ini
+│   │       ├── readline.ini
+│   │       ├── shmop.ini
+│   │       ├── simplexml.ini
+│   │       ├── sockets.ini
+│   │       ├── sqlite3.ini
+│   │       ├── sysvmsg.ini
+│   │       ├── sysvsem.ini
+│   │       ├── sysvshm.ini
+│   │       ├── tokenizer.ini
+│   │       ├── xdebug.ini
+│   │       ├── xml.ini
+│   │       ├── xmlreader.ini
+│   │       ├── xmlwriter.ini
+│   │       ├── xsl.ini
+│   │       └── zip.ini
+│   ├── php_debug
+│   ├── php_errors.json
+│   ├── site_backup
+│   ├── sql_log.log
+│   └── sync_ftp.sh
+├── test.sql
+├── tree.txt
+└── views
+
+15 directories, 67 files

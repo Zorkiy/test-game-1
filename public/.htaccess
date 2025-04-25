@@ -1,0 +1,25 @@
+# Закрыть доступ к сайту для всех.
+
+# order deny,allow
+# deny from all
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# php_flag magic_qotes_gpc off
+# AddDefaultCharset utf-8
+# DirectoryIndex index.php
+# SetEnv TZ Europe/Helsinki
+
+php_flag  display_startup_errors on
+php_flag  display_errors on
+
+Options All -Indexes
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^.*\.(jpg|css|js|gif|png)$ [NC]
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# Нормальний режим роботи сайту.
+RewriteRule ^(.*)$ ./index.php? [L,QSA]
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

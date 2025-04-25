@@ -1,0 +1,6 @@
+SetEnv HTTP_MOD_REWRITE On
+SetEnv TZ Europe/Kyiv
+# Увімкнути Apache-мод перенаправлення url-запитів.
+RewriteEngine On
+# Перенаправляє запит у папку public
+RewriteRule ^(.*) /public/$1

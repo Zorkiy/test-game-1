@@ -1,0 +1,75 @@
+{
+	// Place your Рабочая область wp-petamicr snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+	// Placeholders with the same ids are connected.
+	// Example:
+	"php Serg": {
+		"scope": "php,html",
+		"prefix": "php",
+		"body": [
+			"<?php$0${1: ?>}"
+		],
+		"description": ""
+	},
+	"Debug my snip": {
+		"scope": "php,phar",
+		"prefix": "dd",
+		"body": [
+			"dd($1);$0"
+		],
+		"description": ""
+	},
+	"function Serg": {
+		"scope": "php,phar",
+		"prefix": "func",
+		"body": [
+			"/**",
+			" * @return",
+			" */",
+			"function ${1:foo} () {",
+			"  $0",
+			"}"
+		],
+		"description": ""
+	},
+	"method Serg": {
+		"scope": "php,phar",
+		"prefix": "method",
+		"body": [
+			"/**",
+			" * @return",
+			" */",
+			"${1:static }${2:protected} function ${3:foo} () {",
+			"  $0",
+			"}"
+		],
+		"description": ""
+	},
+	"e Serg": {
+		"scope": "php,phar",
+		"prefix": "e",
+		"body": [
+			"e($0);"
+		],
+		"description": ""
+	},
+	"err Serg": {
+		"scope": "php,phar",
+		"prefix": "err",
+		"body": [
+			"err('$1', ${2:0}, __FILE__, __LINE__,${3:1});"
+		],
+		"description": ""
+	},
+	"this Serg": {
+		"scope": "php,phar",
+		"prefix": "this",
+		"body": [
+			"\\$this${1:->}$0"
+		],
+		"description": ""
+	}
+}
