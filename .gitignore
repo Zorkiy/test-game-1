@@ -1,1 +1,5 @@
 service/
+game.loc.code-workspace
+test.sql
+tree.txt
+.editorconfig
