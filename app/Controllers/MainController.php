@@ -5,7 +5,7 @@ namespace app\Controllers;
 class MainController
 {
 	/**
-	 * @return
+	 * Базовий indexAction
 	 */
 	public function indexAction () {
 

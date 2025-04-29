@@ -1,5 +1,23 @@
-service/
+# Folders
+
+service
+# Inclusion for service
+!service/db_loc_backup
+!service/back_info.txt
+!service/change_access
+!service/load_sql_files.sh
+!service/site_backup
+
+vendor
+.phpdoc
+.vscode
+build
+docs
+
+# Files
+
+.phpdoc.dist.xml
 game.loc.code-workspace
 test.sql
 tree.txt
-.editorconfig
+phpDocumentor.phar
