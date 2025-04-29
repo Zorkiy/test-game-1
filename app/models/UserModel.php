@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Models;
+namespace app\models;
 
 /**
  * Модель для роботи з користувачами.

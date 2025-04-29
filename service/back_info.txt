@@ -14,3 +14,9 @@
 Создан бэкап БД `game` в файл /var/www/html/game.loc/service/local_db/game_29_04_2025__09_57_44.dump.zip.
 Создан бэкап файла /etc/apache2/sites-available/game.loc.conf в /var/www/html/game.loc/service/apache2/.
 Создан бэкап файла /etc/php/8.1/apache2/php.ini в /var/www/html/game.loc/service/apache2/.
+Бекап успішно завершено.
+
+29.04.2025 22:38:03
+Создан бэкап БД `game` в файл /var/www/html/game.loc/service/local_db/game_29_04_2025__22_38_03.dump.zip.
+Создан бэкап файла /etc/apache2/sites-available/game.loc.conf в /var/www/html/game.loc/service/apache2/.
+Создан бэкап файла /etc/php/8.1/apache2/php.ini в /var/www/html/game.loc/service/apache2/.
