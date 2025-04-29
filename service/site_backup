@@ -1,0 +1,126 @@
+#!/bin/bash
+
+. $DIR_SCRIPTS/functions.sh;
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# $1 - источник копирования.
+# $2 - назначение копирования.
+# $3 - файл лога копирования.
+reservCp () {
+	if isFile $1; then
+		if reservCPFile $1 $2; then
+			printMessage "Создан бэкап файла \e[0;93m$1\033[0m в \e[0;93m$2\033[0m.";
+			echo "Создан бэкап файла $1 в $2." >> $3;
+
+			return 0;
+		else
+			printErrMessage "Ошибка создания бэкапа файла \e[0;93m$1\033[0m в \e[0;93m$2\033[0m.";
+			echo "Ошибка создания бэкапа файла $1 в $2." >> $3;
+
+			return 1;
+		fi
+	fi
+
+	if isDir $2; then
+		if reservCPDir $1 $2; then
+			printMessage "Создан бэкап каталога \e[0;93m$1\033[0m в \e[0;93m$2\033[0m.";
+			echo "Создан бэкап каталога $1 в $2." >> $3;
+
+			return 0;
+		else
+			printErrMessage "Ошибка создания бэкапа каталога \e[0;93m$1\033[0m в \e[0;93m$2\033[0m.";
+			echo "Ошибка создания бэкапа каталога $1 в $2." >> $3;
+
+			return 1;
+		fi
+	fi
+
+	printErrMessage "Непредвиденная ошибка резервного копирования \e[0;93m$1\033[0m в \e[0;93m$2\033[0m.";
+	echo "Непредвиденная ошибка резервного копирования $1 в $2." >> $3;
+
+	return 1;
+}
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] Константы
+
+readonly dbName="game";
+readonly PHPVersion="8.1";
+
+readonly siteDir=${PWD##*/};
+readonly sitePath=$DIR_LOC/$siteDir;
+readonly backDir=$HOME/backup;
+readonly backFileInfo=$sitePath/service/back_info.txt;
+readonly displayDt=$(date '+%d.%m.%Y %H:%M:%S');
+readonly fNameDt=$(date '+%d_%m_%Y__%H_%M_%S');
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+echo ;
+printSysMessage "Бэкап проекта [ $sitePath ].";
+read x;
+
+printSysMessage "Запускать скрипт без sudo!";
+read x;
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] Бэкап БД.
+
+sudo chown -R $USER:$USER $sitePath;
+
+echo -e "\n"$displayDt >> $backFileInfo;
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] Бекап БД.
+
+dbSqlFileName="$sitePath/service/db_loc_backup/$dbName"_"$fNameDt.dump.sql";
+touch $dbSqlFileName;
+dbZipName=$dbName"_"$fNameDt".dump.zip";
+dbZipFullName=$sitePath/service/local_db/$dbName"_"$fNameDt".dump.zip";
+
+if sudo mysqldump -u root $dbName > $dbSqlFileName; then
+	if zipFile 1 $dbZipName $dbSqlFileName; then
+		rm $dbSqlFileName;
+		printMessage "Создан бэкап БД \`$dbName\` в файл \e[0;93m$dbZipFullName\033[0m.";
+		echo "Создан бэкап БД \`$dbName\` в файл $dbZipFullName." >> $backFileInfo;
+	else
+		printErrMessage "Ошибка zip-архивации файла dump-а базы данных \e[0;93m$dbZipFullName\033[0m.";
+		echo "Ошибка zip-архивации файла dump-а базы данных $dbZipFullName." >> $backFileInfo;
+		echo;
+		exit 1;
+	fi
+else
+	printErrMessage "Ошибка создания бэкапа БД \`$dbName\`.";
+	echo "Ошибка создания бэкапа БД \`$dbName\`." >> $backFileInfo;
+	echo;
+ 	exit 1;
+fi
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] Резервное копирование каталогов и файлов.
+
+if ! reservCp /etc/apache2/sites-available/$siteDir.conf $sitePath/service/apache2/ $backFileInfo;
+then
+	exit 1;
+fi
+
+if ! reservCp /etc/php/$PHPVersion/apache2/php.ini $sitePath/service/apache2/ $backFileInfo;
+then
+	exit 1;
+fi
+
+echo;
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] git commit - push.
+
+autocommit $sitePath;
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# [1] Вывод информации о результате бэкапа.
+
+echo ;
+msg="Бекап успішно завершено.";
+printSysMessage "$msg";
+echo "$msg" >> $backFileInfo;

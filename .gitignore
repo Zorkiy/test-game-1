@@ -1,12 +1,13 @@
 # Folders
 
-service
-# Inclusion for service
-!service/db_loc_backup
-!service/back_info.txt
-!service/change_access
-!service/load_sql_files.sh
-!service/site_backup
+# Ignore everything in the service directory
+/service/*
+# BUT allow specific files or folders back in
+!/service/back_info.txt
+!/service/load_sql_files.sh
+!/service/db_loc_backup/
+!/service/change_access
+!/service/site_backup
 
 vendor
 .phpdoc

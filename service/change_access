@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ $EUID -eq 0 ]]; then
+    echo "Ошибка: этот скрипт не должен выполняться от root!" >&2
+    exit 1
+fi
+
+. $DIR_SCRIPTS/functions.sh;
+
+readonly SitesRoot=$(realpath $(pwd));
+
+printSysMessage '=== Запускать скрипт без sudo! ===';
+
+read x;
+
+printSysMessage 'Налаштувати права доступу до віртуального хоста '$SitesRoot'?';
+
+read -p ' >> ' x;
+
+if [ "$x" != "y" ]; then printMessage 'Виконання завершено'; exit; fi
+
+sudo chown -R serg:www-data $SitesRoot;
+
+sudo find $SitesRoot -type d -exec chmod 775 {} \;
+# Налаштування для локальної розробки.
+sudo find $SitesRoot -type f -exec chmod 644 {} \;
+sudo find $SitesRoot/service -type f -exec chmod 666 {} \;
+# Налаштування для хостинга.
+# sudo find /var/www/html/wp-petamicr -type f -exec chmod 644 {} \;
+
+sudo chmod +x $SitesRoot/service/site_backup;
+sudo chmod +x $SitesRoot/service/change_access;
+sudo chmod +x $SitesRoot/artisan;
